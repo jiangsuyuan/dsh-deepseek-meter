@@ -63,6 +63,13 @@ dsh plugin --profile <name> add ./dsh-deepseek-meter-0.1.0.tgz
 
 > `DEEPSEEK_PLATFORM_TOKEN` 相当于平台网页登录凭证,请像密码一样保管;泄露后到平台退出登录即可使其失效。
 
+## 架构与 RPC 通道
+
+- **host 半**:`lib/index.js`(ESM 标准 Cordis 插件,`dsh.bundle` 配置层),拉取官方数据,通过 `ctx.webServer.register()` 注册 `/api/deepseek-meter/state` HTTP 路由暴露状态。
+- **client 半**:`lib/client.js`(CJS,`window.__ModuleLoader__.load` 契约,`dsh.client` 声明),右下角胶囊 UI 每 2s 轮询该路由。
+
+> **为何不用官方 Typert Remote**:DSH 官方静态双端插件的标准 client→host 通道是 Typert Remote(`@deepseek-ai/dsh-typert-generator` 已发布到 npm,理论可行),但该路径在仓库内无第三方先例、需要 typertPlugin 构建链 + client `$mount` 自挂载,风险未验证。本插件 v0.1.0 采用 `webServer` HTTP 路由:公开 API、独立可构建、同源无 CORS,功能等价。**升级到 Typert Remote 的迁移路径**:host 半改为 `TypertRemoteService` 子类 + `@Remote('state')`,package.json 导出 `./typert`/`./remote`,client 半 `ctx.remote.$mount` 后 `ctx.remote.<ns>.state()` 直调。若 DSH 后续版本调整 `webServer` API,可借此路径迁移。
+
 ## 许可证
 
 MIT
