@@ -58,7 +58,9 @@ export default {
     }
 
     slots.inject('shell.overlay', () => slots.register(
-      { name: 'shell.overlay', id: 'usage-meter-badge', order: 1000, label: '官方用量' },
+      // 加固:用包专属 id,避免与动态版(umcap-*)的 'usage-meter-badge' 冲突
+      // (同 id 同优先级注册会 throw)。若仍与其它插件撞 id,改这里即可。
+      { name: 'shell.overlay', id: 'dsh-deepseek-meter-pill', order: 1000, label: '官方用量' },
       (props: Record<string, unknown>) => {
         const [state, setState] = React.useState<Record<string, unknown> | null>(null)
         const [open, setOpen] = React.useState(false)

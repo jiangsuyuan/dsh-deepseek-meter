@@ -220,6 +220,11 @@ export default {
         const result = await platFetch(token, [u1, u2])
         if (!result.ok) return // 瞬时失败：保留上次数据
         const json = JSON.parse(result.text.trim())
+        // 加固:接口返回非预期结构(非数组/元素缺失)时给出明确错误而非静默
+        if (!Array.isArray(json) || json.length < 2) {
+          usageError = '官方用量返回异常（响应结构不符）'
+          return
+        }
         if (json[0].code === 40003 || json[1].code === 40003) {
           usage = null
           usageError = '平台 Token 无效或已过期，请重新获取'
@@ -308,6 +313,11 @@ export default {
         const result = await platFetch(token, [u1, u2])
         if (!result.ok) return // 瞬时失败：保留上次数据
         const json = JSON.parse(result.text.trim())
+        // 加固:接口返回非预期结构(非数组/元素缺失)时给出明确错误而非静默
+        if (!Array.isArray(json) || json.length < 2) {
+          myKeyError = '官方按 key 用量返回异常（响应结构不符）'
+          return
+        }
         if (json[0].code === 40003 || json[1].code === 40003) {
           myKey = null
           myKeyError = '平台 Token 无效或已过期，请重新获取'
@@ -328,11 +338,13 @@ export default {
     }
 
     // ===================== 启动 + 周期刷新 =====================
-    refreshBalance()
-    refreshUsage()
-    refreshMyKey()
-    ctx.interval(() => { refreshBalance() }, BALANCE_MS)
-    ctx.interval(() => { refreshUsage(); refreshMyKey() }, USAGE_MS)
+    // 加固:refresh* 内部已 try/catch 全覆盖,这里再挂 .catch() 双保险,
+    // 杜绝任何意外 rejection 触发 Node 的 unhandledRejection 退出。
+    refreshBalance().catch(() => {})
+    refreshUsage().catch(() => {})
+    refreshMyKey().catch(() => {})
+    ctx.interval(() => { refreshBalance().catch(() => {}) }, BALANCE_MS)
+    ctx.interval(() => { refreshUsage().catch(() => {}); refreshMyKey().catch(() => {}) }, USAGE_MS)
 
     // ===================== 供前端轮询的 RPC =====================
     // 动态插件用闭包注入的 harness.handle;静态双端插件没有该通道,

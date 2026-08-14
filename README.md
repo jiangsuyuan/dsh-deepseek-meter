@@ -52,6 +52,13 @@ dsh plugin --profile <name> add ./dsh-deepseek-meter-0.1.0.tgz
 | `uiPollMs` | `2000` | 前端轮询间隔 |
 | `fetchTimeoutMs` | `20000` | 子进程请求超时 |
 
+> 配置字段类型须按表填写(字符串/数字)。类型错误会导致插件**加载失败**(行失效,不会使 dsh 崩溃)——修改配置并重启即可恢复。
+
+## 与动态版插件共存
+
+- 本插件的胶囊使用专属 id `dsh-deepseek-meter-pill`,与旧动态版(`umcap-*`,id `usage-meter-badge`)**不会冲突**。
+- 但若旧动态版仍在运行,页面会**同时出现两个胶囊**(数据相同)。停用动态版即可:在会话中 `cordis_stop umcap-<id>`,或等 dsh 重启后动态定义自动消失。
+
 ## 凭据
 
 插件的代码中**不包含任何密钥**。运行前请确保 DSH 凭据中已配置:
