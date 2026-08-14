@@ -1,0 +1,5 @@
+# dsh-deepseek-meter 插件行:一个包同时提供 host 半(数据拉取+RPC)与 client 半(胶囊 UI)。
+# clientModules 扫描到 dsh.client 声明后自动 serve /plugins/<id>/client.js。
+- insert:
+    - id: deepseek-meter
+      name: dsh-deepseek-meter
