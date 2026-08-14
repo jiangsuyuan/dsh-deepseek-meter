@@ -10,6 +10,7 @@ export const name = 'dsh-deepseek-meter/client'
  * - 注意:client 端没有 timer 服务(host 才有),周期轮询用浏览器原生 setInterval。
  */
 export default {
+  name: 'dsh-deepseek-meter/client',
   // slots 服务(浏览器端由 dsh-client-runtime 提供)必须就绪后才能注册 UI。
   inject: ['slots'],
   apply(ctx: Context) {

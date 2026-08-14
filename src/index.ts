@@ -24,6 +24,10 @@ export const Config: Schema<Config> = Schema.object({
  * 凭据只走显式 env 传入 Node 子进程(本机 Schannel 损坏,必须绕开系统 TLS)。
  */
 export default {
+  // 插件对象必须自带 Config:Cordis 的 runtime.Config = plugin.Config,
+  // 只有对象上有 Config,schema 才会校验并填充默认值(否则 config 为 undefined,apply 崩溃)。
+  name: 'dsh-deepseek-meter',
+  Config,
   // webServer 必须就绪后才注册路由;timer 提供周期刷新(host 端服务,base bundle 提供)。
   inject: ['timer', 'webServer'],
   apply(ctx: Context, config: Config) {
