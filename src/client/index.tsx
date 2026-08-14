@@ -7,9 +7,9 @@ export const name = 'dsh-deepseek-meter/client'
  * Client half: 右下角可折叠胶囊 UI。
  * - 数据经 HTTP 路由 `/api/deepseek-meter/state` 从 host 半拉取(每 2s 轮询)。
  * - CSS 通过 <style> 标签注入(静态 client 插件无 styles 闭包符号,但有完整 DOM)。
+ * - 注意:client 端没有 timer 服务(host 才有),周期轮询用浏览器原生 setInterval。
  */
 export default {
-  inject: ['timer'],
   apply(ctx: Context) {
     const slots = ctx.get('slots')
     if (slots === undefined) return
@@ -71,8 +71,8 @@ export default {
             }).catch(() => {}).then(() => { busy = false })
           }
           tick()
-          const dispose = ctx.interval(tick, 2000)
-          return () => { alive = false; dispose() }
+          const timer = setInterval(tick, 2000)
+          return () => { alive = false; clearInterval(timer) }
         }, [])
 
         const fmtTok = (n: number) => {
