@@ -24,7 +24,8 @@ export const Config: Schema<Config> = Schema.object({
  * 凭据只走显式 env 传入 Node 子进程(本机 Schannel 损坏,必须绕开系统 TLS)。
  */
 export default {
-  inject: ['timer'],
+  // webServer 必须就绪后才注册路由;timer 提供周期刷新(host 端服务,base bundle 提供)。
+  inject: ['timer', 'webServer'],
   apply(ctx: Context, config: Config) {
     const BALANCE_URL = config.balanceUrl
     const PLATFORM_BASE = config.platformBase
