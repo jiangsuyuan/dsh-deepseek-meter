@@ -6,6 +6,16 @@ DSH (DeepSeek Harness) 插件:右下角**可折叠胶囊**,显示 DeepSeek 官�
 - 展开态:官方余额(含充值/赠送拆分)、我的 key 本月/今日 tokens 与花费、账号合计(所有 key)本月/今日
 - 全部数据来自 DeepSeek 官方接口,无本地统计
 
+## 界面预览
+
+**折叠态**(右下角胶囊,点击展开):
+
+![折叠态](docs/screenshots/collapsed.png)
+
+**展开态**(点击胶囊后):
+
+![展开态](docs/screenshots/expanded.png)
+
 ## 数据源
 
 | 数据 | 接口 | 鉴权 | 刷新 |
