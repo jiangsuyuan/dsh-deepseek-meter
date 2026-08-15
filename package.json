@@ -1,7 +1,25 @@
 {
   "name": "dsh-deepseek-meter",
   "version": "0.1.0",
-  "description": "DSH plugin: DeepSeek official usage & balance collapsible pill (my key + account totals)",
+  "description": "DSH (DeepSeek Harness) Cordis plugin: DeepSeek official usage & balance collapsible pill (my key + account totals)",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "cordis",
+    "plugin",
+    "deepseek",
+    "usage",
+    "balance",
+    "quota"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiangsuyuan/dsh-deepseek-meter.git"
+  },
+  "homepage": "https://github.com/jiangsuyuan/dsh-deepseek-meter#readme",
+  "bugs": {
+    "url": "https://github.com/jiangsuyuan/dsh-deepseek-meter/issues"
+  },
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

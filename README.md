@@ -1,20 +1,24 @@
-# dsh-deepseek-meter — DeepSeek 官方用量·余额可折叠胶囊
+# dsh-deepseek-meter
 
-DSH (DeepSeek Harness) 插件:右下角**可折叠胶囊**,显示 DeepSeek 官方账户用量与余额。
+[![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
+
+**DSH (DeepSeek Harness) 插件** — DeepSeek 官方用量·余额可折叠胶囊。Cordis 双端插件(host 拉取官方数据 + client 渲染胶囊),安装方式:`dsh plugin add dsh-deepseek-meter`。
+
+## 界面预览
+
+**折叠态**(右下角胶囊,显示我的 key 今日花费 + 今日 tokens):
+
+![折叠态](docs/screenshots/collapsed.png)
+
+**展开态**(点击胶囊,显示官方余额 / 我的 key / 账号合计):
+
+![展开态](docs/screenshots/expanded.png)
+
+## 特性
 
 - 折叠态:我的 key(个人)今日花费 + 今日 tokens
 - 展开态:官方余额(含充值/赠送拆分)、我的 key 本月/今日 tokens 与花费、账号合计(所有 key)本月/今日
 - 全部数据来自 DeepSeek 官方接口,无本地统计
-
-## 界面预览
-
-**折叠态**(右下角胶囊,点击展开):
-
-![折叠态](docs/screenshots/collapsed.png)
-
-**展开态**(点击胶囊后):
-
-![展开态](docs/screenshots/expanded.png)
 
 ## 数据源
 
