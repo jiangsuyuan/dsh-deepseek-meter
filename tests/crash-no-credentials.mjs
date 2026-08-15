@@ -1,7 +1,7 @@
 // 崩溃隐患回归测试:模拟"新用户安装、未配置任何凭据"的加载场景。
 // 模拟 Cordis loader 流程:plugin(plugin, undefined) → schema 填充默认 config → apply。
 // 断言:无同步异常、无 unhandledRejection、状态为"未配置"错误而非崩溃。
-import plugin from './dsh-deepseek-meter/lib/index.js'
+import plugin from '../lib/index.js'
 
 const failures = []
 let unhandled = null

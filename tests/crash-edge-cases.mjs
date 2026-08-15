@@ -1,5 +1,5 @@
 // 边缘场景回归测试:凭据存在但接口/子进程异常时,不得崩溃。
-import plugin from './dsh-deepseek-meter/lib/index.js'
+import plugin from '../lib/index.js'
 
 const failures = []
 process.on('unhandledRejection', (reason) => {
