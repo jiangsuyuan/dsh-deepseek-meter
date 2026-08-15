@@ -28,8 +28,9 @@ export default {
   // 只有对象上有 Config,schema 才会校验并填充默认值(否则 config 为 undefined,apply 崩溃)。
   name: 'dsh-deepseek-meter',
   Config,
-  // webServer 必须就绪后才注册路由;timer 提供周期刷新(host 端服务,base bundle 提供)。
-  inject: ['timer', 'webServer'],
+  // webServer 注册路由、credentials 读凭据、timer 周期刷新,均需就绪后才 apply
+  // (否则 apply 时 ctx.get 拿到 undefined,误报"未配置")。
+  inject: ['timer', 'webServer', 'credentials'],
   apply(ctx: Context, config: Config) {
     const BALANCE_URL = config.balanceUrl
     const PLATFORM_BASE = config.platformBase
