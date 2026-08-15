@@ -1,4 +1,4 @@
-# dsh-deepseek-meter
+# dsh-deepseek-meter 余额与tokens用量统计
 
 [![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
 
